@@ -49,7 +49,7 @@ cd "$SCRIPT_DIR"
 DEFAULT_ARGS=(
     "--format" "json" "markdown"
     "--output-dir" "$REPORT_DIR"
-    "../dms" "../ps-cmmc-v3"
+    "Projects/dms" "Projects/ps-cmmc-v3"
 )
 
 # Add any additional arguments passed to this script

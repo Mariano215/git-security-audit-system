@@ -1,0 +1,169 @@
+# gitleaks.toml - Gitleaks configuration for comprehensive scanning
+# GitLab Security Audit System - Enhanced Configuration
+
+title = "GitLab Security Audit Gitleaks Configuration"
+
+# Global configuration - extend with custom rules
+[extend]
+path = "config/gitleaks-rules.toml"
+
+# Additional custom rules for GitLab-specific secrets
+[[rules]]
+id = "gitlab-personal-access-token"
+description = "GitLab Personal Access Token"
+regex = '''glpat-[0-9a-zA-Z\-_]{20}'''
+tags = ["gitlab", "token"]
+
+[[rules]]
+id = "gitlab-runner-token"
+description = "GitLab Runner Registration Token"
+regex = '''glrt-[0-9a-zA-Z\-_]{20}'''
+tags = ["gitlab", "runner", "token"]
+
+[[rules]]
+id = "gitlab-deploy-token"
+description = "GitLab Deploy Token"
+regex = '''gldt-[0-9a-zA-Z\-_]{20}'''
+tags = ["gitlab", "deploy", "token"]
+
+[[rules]]
+id = "gitlab-feed-token"
+description = "GitLab Feed Token"
+regex = '''glft-[0-9a-zA-Z\-_]{20}'''
+tags = ["gitlab", "feed", "token"]
+
+[[rules]]
+id = "gitlab-oauth-application-secret"
+description = "GitLab OAuth Application Secret"
+regex = '''gloas-[0-9a-zA-Z\-_]{64}'''
+tags = ["gitlab", "oauth", "secret"]
+
+[[rules]]
+id = "gitlab-kubernetes-agent-token"
+description = "GitLab Kubernetes Agent Token"
+regex = '''glagent-[0-9a-zA-Z\-_]{50}'''
+tags = ["gitlab", "kubernetes", "agent", "token"]
+
+# Core AWS patterns
+[[rules]]
+id = "aws-access-key-id"
+description = "AWS Access Key ID"
+regex = '''AKIA[0-9A-Z]{16}'''
+tags = ["aws", "key"]
+
+[[rules]]
+id = "aws-secret-access-key"
+description = "AWS Secret Access Key"
+regex = '''(?i)aws.{0,20}secret.{0,20}access.{0,20}key.{0,20}[=:]\s*["\']?[A-Za-z0-9+/]{40}["\']?'''
+tags = ["aws", "secret"]
+
+# Enhanced AWS patterns
+[[rules]]
+id = "aws-session-token"
+description = "AWS Session Token"
+regex = '''(?i)aws.{0,20}session.{0,20}token.{0,20}[=:]\s*["\']?[A-Za-z0-9+/]{16,}[=]{0,2}["\']?'''
+tags = ["aws", "session", "token"]
+
+# Azure-specific patterns
+[[rules]]
+id = "azure-storage-key"
+description = "Azure Storage Account Key"
+regex = '''(?i)azure.{0,20}storage.{0,20}key.{0,20}[=:]\s*["\']?[A-Za-z0-9+/]{88}[=]{0,2}["\']?'''
+tags = ["azure", "storage", "key"]
+
+# Database URL with credentials
+[[rules]]
+id = "database-url-with-credentials"
+description = "Database URL with credentials"
+regex = '''(?i)(postgres|mysql|mongodb)://[^:]+:[^@]+@[^/]+'''
+tags = ["database", "url"]
+
+# Database connection strings
+[[rules]]
+id = "mongodb-connection-string"
+description = "MongoDB Connection String"
+regex = '''mongodb(\+srv)?://[^\s"'<>]+'''
+tags = ["database", "mongodb", "connection-string"]
+
+[[rules]]
+id = "postgresql-connection-string"
+description = "PostgreSQL Connection String"
+regex = '''postgres(ql)?://[^\s"'<>]+'''
+tags = ["database", "postgresql", "connection-string"]
+
+[[rules]]
+id = "mysql-connection-string"
+description = "MySQL Connection String"
+regex = '''mysql://[^\s"'<>]+'''
+tags = ["database", "mysql", "connection-string"]
+
+# API Keys and Tokens
+[[rules]]
+id = "api-key-patterns"
+description = "API Key patterns"
+regex = '''(?i)(api[_-]?key|apikey)[\"\'`\s]*[:=][\"\'`\s]*[a-zA-Z0-9]{16,}'''
+tags = ["api", "key"]
+
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key Pattern"
+regex = '''(?i)(api.{0,20}key.{0,20}[=:]\s*["\']?[a-z0-9]{32,}["\']?)'''
+tags = ["api", "key"]
+
+[[rules]]
+id = "jwt-token"
+description = "JWT Token"
+regex = '''eyJ[A-Za-z0-9_-]{4,}\.eyJ[A-Za-z0-9_-]{4,}\.[A-Za-z0-9_-]{4,}'''
+tags = ["jwt", "token"]
+
+# Allowlists (files and paths to ignore)
+[allowlist]
+description = "Allowlist for false positives"
+
+# Common file patterns to ignore
+paths = [
+    '''^\.git/''',
+    '''^node_modules/''',
+    '''^vendor/''',
+    '''^\.venv/''',
+    '''^venv/''',
+    '''^__pycache__/''',
+    '''^\.pytest_cache/''',
+    '''^coverage/''',
+    '''^dist/''',
+    '''^build/''',
+    '''^\.next/''',
+    '''\.lock$''',
+    '''\.log$''',
+    '''\.min\.js$''',
+    '''\.min\.css$''',
+    ".secrets.baseline",
+    "docs/examples/",
+    "test/fixtures/",
+]
+
+# Commit patterns to ignore (test commits, etc.)
+commits = [
+    '''test''',
+    '''fixture''',
+    '''example''',
+    '''demo''',
+]
+
+# Specific strings that might trigger false positives
+regexes = [
+    "example\\.com",
+    "localhost",
+    "127\\.0\\.0\\.1",
+    "test_key_.*",
+    "dummy_.*",
+    "placeholder_.*",
+    "\\.env\\.example",
+    "config\\.sample\\.",
+    "\\.template$",
+    "\\.spec\\.js$",
+    "\\.test\\.js$",
+    '''password\s*=\s*["']?(test|demo|example|placeholder)["']?''',
+    '''api.{0,20}key\s*=\s*["']?(test|demo|example|placeholder)["']?''',
+    '''secret\s*=\s*["']?(test|demo|example|placeholder)["']?''',
+]

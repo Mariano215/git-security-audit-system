@@ -1,0 +1,110 @@
+# Environment Configuration (CRITICAL - Contains secrets!)
+.env
+.env.local
+.env.*.local
+
+# Security Reports (May contain sensitive findings)
+reports/
+logs/
+*.log
+
+# Security Tool Outputs
+.security_backups/
+rotation_scripts/
+*.backup
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Testing
+.coverage
+.pytest_cache/
+.benchmarks/
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+*.tmp
+*.temp
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Security Tools (downloaded during setup - NOT stored in git due to size)
+tools/
+!tools/.gitkeep
+
+# Temporary Files
+*.pid
+*.lock
+.audit_running
+
+# Local Configuration
+config/local_*
+config/*.local.*
+
+# Sensitive Test Data
+test_secrets.json
+test_credentials.*
+*_private_*
+*_secret_*
+
+# Archive Files (may contain sensitive data)
+*.tar.gz
+*.zip
+*.7z
+*.rar
+backup_*
+archive_*

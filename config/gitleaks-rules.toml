@@ -1,0 +1,97 @@
+# gitleaks-rules.toml - Extended rules for eccalon-specific patterns
+# This file contains additional rules specific to eccalon.com domain and environments
+
+[[rules]]
+id = "eccalon-domain-credentials"
+description = "Eccalon domain credentials"
+regex = '''(?i)(eccalon\.com|gitlab\.eccalon\.com)[^:]*://[^:]+:[^@]+@'''
+tags = ["eccalon", "internal"]
+
+[[rules]]
+id = "ssh-private-key"
+description = "SSH Private Key"
+regex = '''-----BEGIN [A-Z]+ PRIVATE KEY-----'''
+tags = ["ssh", "private-key"]
+
+[[rules]]
+id = "ssl-certificate-private-key"
+description = "SSL Certificate Private Key"
+regex = '''-----BEGIN PRIVATE KEY-----'''
+tags = ["ssl", "private-key"]
+
+[[rules]]
+id = "docker-registry-credentials"
+description = "Docker registry credentials"
+regex = '''(?i)(docker[_-]?registry)[\"\'`\s]*[:=][\"\'`\s]*[^\"\'`\s]+'''
+tags = ["docker", "registry"]
+
+[[rules]]
+id = "environment-variable-secrets"
+description = "Environment variable with secrets"
+regex = '''(?i)(password|secret|key|token)[\"\'`\s]*[:=][\"\'`\s]*[^\"\'`\s]{16,}'''
+tags = ["env", "secret"]
+
+# Additional eccalon.com specific patterns
+[[rules]]
+id = "eccalon-internal-token"
+description = "Eccalon internal service token"
+regex = '''(?i)eccalon[_-]?(token|key|secret)[\"\'`\s]*[:=][\"\'`\s]*[a-zA-Z0-9]{16,}'''
+tags = ["eccalon", "token", "internal"]
+
+[[rules]]
+id = "eccalon-api-credentials"
+description = "Eccalon API credentials"
+regex = '''(?i)(eccalon[_-]?api)[\"\'`\s]*[:=][\"\'`\s]*[a-zA-Z0-9]{20,}'''
+tags = ["eccalon", "api", "credentials"]
+
+# GitLab specific patterns for eccalon environment
+[[rules]]
+id = "gitlab-eccalon-webhook-token"
+description = "GitLab Eccalon Webhook Token"
+regex = '''(?i)(gitlab[_-]?webhook[_-]?token)[\"\'`\s]*[:=][\"\'`\s]*[a-zA-Z0-9]{20,}'''
+tags = ["gitlab", "eccalon", "webhook", "token"]
+
+[[rules]]
+id = "gitlab-eccalon-ci-token"
+description = "GitLab Eccalon CI Token"
+regex = '''(?i)(gitlab[_-]?ci[_-]?token)[\"\'`\s]*[:=][\"\'`\s]*[a-zA-Z0-9]{20,}'''
+tags = ["gitlab", "eccalon", "ci", "token"]
+
+# Enterprise patterns commonly found in eccalon environments
+[[rules]]
+id = "ldap-bind-credentials"
+description = "LDAP bind credentials"
+regex = '''(?i)(ldap[_-]?bind[_-]?(password|secret))[\"\'`\s]*[:=][\"\'`\s]*[^\"\'`\s]{8,}'''
+tags = ["ldap", "bind", "credentials"]
+
+[[rules]]
+id = "saml-certificate"
+description = "SAML Certificate"
+regex = '''-----BEGIN CERTIFICATE-----[^-]*-----END CERTIFICATE-----'''
+tags = ["saml", "certificate"]
+
+[[rules]]
+id = "oauth-client-secret"
+description = "OAuth Client Secret"
+regex = '''(?i)(oauth[_-]?client[_-]?secret)[\"\'`\s]*[:=][\"\'`\s]*[a-zA-Z0-9]{32,}'''
+tags = ["oauth", "client", "secret"]
+
+# Database specific patterns for eccalon
+[[rules]]
+id = "eccalon-database-password"
+description = "Eccalon database password"
+regex = '''(?i)(eccalon[_-]?db[_-]?password)[\"\'`\s]*[:=][\"\'`\s]*[^\"\'`\s]{8,}'''
+tags = ["eccalon", "database", "password"]
+
+# Cloud provider patterns specific to eccalon infrastructure
+[[rules]]
+id = "azure-eccalon-tenant-id"
+description = "Azure Eccalon Tenant ID"
+regex = '''(?i)(azure[_-]?tenant[_-]?id)[\"\'`\s]*[:=][\"\'`\s]*[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'''
+tags = ["azure", "eccalon", "tenant", "id"]
+
+[[rules]]
+id = "aws-eccalon-account-id"
+description = "AWS Eccalon Account ID"
+regex = '''(?i)(aws[_-]?account[_-]?id)[\"\'`\s]*[:=][\"\'`\s]*[0-9]{12}'''
+tags = ["aws", "eccalon", "account", "id"]

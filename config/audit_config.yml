@@ -1,0 +1,241 @@
+# audit_config.yml - Comprehensive Security Audit Configuration
+# This configuration file controls all aspects of the GitLab Security Audit System
+
+# Audit Settings - Core configuration for the security audit process
+audit_settings:
+  # Projects configuration - where to find and how to scan projects
+  projects:
+    # Default projects to scan if none specified
+    default_paths:
+      - "../dms"
+      - "../ps-cmmc-v3"
+
+    # Maximum depth for recursive directory scanning
+    max_depth: 5
+
+    # Include hidden directories (starting with .)
+    include_hidden: false
+
+    # Maximum file size to scan (in MB)
+    max_file_size_mb: 10
+
+  # Tools configuration - which security tools to run and how
+  tools:
+    # Enable/disable specific security tools
+    gitleaks:
+      enabled: true
+      parallel: true
+      timeout_seconds: 300
+
+    semgrep:
+      enabled: true
+      parallel: true
+      timeout_seconds: 600
+      # Custom rules directory (optional)
+      custom_rules_dir: null
+
+    trufflehog:
+      enabled: true
+      parallel: true
+      timeout_seconds: 300
+
+    # Tool execution settings
+    max_parallel_tools: 3
+    tool_timeout_seconds: 900
+
+  # Analysis configuration - how findings are processed and correlated
+  analysis:
+    # Deduplication settings
+    enable_deduplication: true
+    similarity_threshold: 0.8
+
+    # Risk calculation settings
+    enable_risk_scoring: true
+    business_context_weight: 0.3
+
+    # False positive handling
+    enable_false_positive_detection: true
+    false_positive_confidence_threshold: 0.7
+
+  # Remediation configuration - automated fixing settings
+  remediation:
+    # Enable automatic remediation
+    enable_auto_remediation: false
+
+    # Backup settings for remediation
+    create_backups: true
+    backup_directory: ".security_backups"
+
+    # Secret rotation settings
+    enable_secret_rotation: false
+    rotation_strategy: "environment_variables"
+
+    # File operation settings
+    dry_run: false
+    atomic_operations: true
+
+  # Reporting configuration - output formats and content
+  reporting:
+    # Default output formats
+    default_formats: ["json", "markdown"]
+
+    # Report sections to include
+    include_executive_summary: true
+    include_detailed_findings: true
+    include_remediation_steps: true
+    include_risk_analysis: true
+
+    # Output directories
+    output_directory: "reports"
+    archive_reports: true
+
+    # Report styling
+    include_charts: false
+    include_timeline: true
+
+# Risk Thresholds - Define risk levels and scoring
+risk_thresholds:
+  # Risk level thresholds (0-10 scale)
+  critical: 9.0
+  high: 7.0
+  medium: 4.0
+  low: 2.0
+
+  # Risk factors and weights
+  factors:
+    severity: 0.4          # Tool-reported severity
+    confidence: 0.3        # Detection confidence
+    exposure: 0.2          # Potential exposure level
+    business_impact: 0.1   # Business context impact
+
+  # Classification criteria
+  classification:
+    # Secret exposure risks
+    exposed_api_keys: "critical"
+    exposed_passwords: "high"
+    exposed_tokens: "high"
+
+    # Code quality risks
+    sql_injection: "high"
+    xss_vulnerability: "medium"
+    path_traversal: "medium"
+
+    # Configuration risks
+    weak_crypto: "medium"
+    insecure_defaults: "low"
+
+# Exclusions - Define what to skip during scanning
+exclusions:
+  # Path exclusions - directories and files to skip
+  paths:
+    - "node_modules"
+    - ".git"
+    - ".venv"
+    - "__pycache__"
+    - "*.pyc"
+    - ".pytest_cache"
+    - ".coverage"
+    - "venv"
+    - "env"
+    - "build"
+    - "dist"
+    - ".tox"
+    - ".benchmarks"
+
+  # File extension exclusions
+  file_extensions:
+    - ".log"
+    - ".tmp"
+    - ".cache"
+    - ".swp"
+    - ".bak"
+    - ".orig"
+    - ".DS_Store"
+    - ".pyc"
+    - ".pyo"
+    - ".so"
+    - ".dll"
+    - ".exe"
+    - ".bin"
+    - ".jar"
+    - ".war"
+
+  # False positive patterns - known safe patterns to ignore
+  false_positives:
+    # Common test patterns
+    - pattern: "test_api_key"
+      reason: "Test API key placeholder"
+      confidence: 0.9
+
+    - pattern: "example_password"
+      reason: "Documentation example"
+      confidence: 0.8
+
+    - pattern: "dummy_token"
+      reason: "Test token placeholder"
+      confidence: 0.8
+
+    # Development patterns
+    - pattern: "localhost"
+      reason: "Local development"
+      confidence: 0.6
+
+    - pattern: "127.0.0.1"
+      reason: "Local development"
+      confidence: 0.6
+
+# Integration Settings - External system integrations
+integration:
+  # GitLab integration (if applicable)
+  gitlab:
+    enabled: false
+    api_url: null
+    access_token_env: "GITLAB_ACCESS_TOKEN"
+
+  # Slack notifications (if applicable)
+  slack:
+    enabled: false
+    webhook_url_env: "SLACK_WEBHOOK_URL"
+    notify_on_critical: true
+    notify_on_completion: false
+
+  # Email notifications (if applicable)
+  email:
+    enabled: false
+    smtp_server: null
+    smtp_port: 587
+    sender_email_env: "AUDIT_SENDER_EMAIL"
+    recipient_emails: []
+
+# Performance Settings - Optimize execution performance
+performance:
+  # Parallel execution settings
+  max_worker_threads: 4
+  enable_caching: true
+  cache_duration_hours: 24
+
+  # Memory management
+  max_memory_usage_mb: 2048
+  gc_threshold: 1000
+
+  # Progress reporting
+  progress_reporting: true
+  progress_update_interval: 30
+
+# Logging Configuration - Control audit logging
+logging:
+  # Log levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: "INFO"
+
+  # Log formatting
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+  # Log output
+  console: true
+  file: true
+  log_file: "security_audit.log"
+
+  # Log rotation
+  rotate_logs: true
+  max_log_size_mb: 10
+  backup_count: 5

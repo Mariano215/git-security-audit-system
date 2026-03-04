@@ -1,0 +1,340 @@
+{
+  "status": "success",
+  "scan_info": {
+    "project_path": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs",
+    "scan_start": "2026-03-04T07:57:44.855505",
+    "scan_end": "2026-03-04T07:57:52.184943",
+    "scan_duration": "0:00:07.329438",
+    "tools_requested": [
+      "gitleaks",
+      "semgrep"
+    ],
+    "tools_successful": [
+      "gitleaks",
+      "semgrep"
+    ],
+    "parallel_execution": true
+  },
+  "summary": {
+    "total_findings": 13,
+    "tools_run": 2,
+    "tools_successful": 2
+  },
+  "results": {
+    "gitleaks": {
+      "status": "success",
+      "tool_version": "8.18.2",
+      "scan_time": "2026-03-04T07:57:44.898633",
+      "findings": [
+        {
+          "Description": "SSL Certificate Private Key",
+          "StartLine": 162,
+          "EndLine": 162,
+          "StartColumn": 13,
+          "EndColumn": 39,
+          "Match": "-----BEGIN PRIVATE KEY-----",
+          "Secret": "-----BEGIN PRIVATE KEY-----",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 3.2002888,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "ssl",
+            "private-key"
+          ],
+          "RuleID": "ssl-certificate-private-key",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:ssl-certificate-private-key:162"
+        },
+        {
+          "Description": "Environment variable with secrets",
+          "StartLine": 776,
+          "EndLine": 776,
+          "StartColumn": 15,
+          "EndColumn": 40,
+          "Match": "secret\": \"secret_value_123",
+          "Secret": "secret",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 2.251629,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "env",
+            "secret"
+          ],
+          "RuleID": "environment-variable-secrets",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:environment-variable-secrets:776"
+        },
+        {
+          "Description": "Environment variable with secrets",
+          "StartLine": 783,
+          "EndLine": 783,
+          "StartColumn": 23,
+          "EndColumn": 50,
+          "Match": "password = 'secret_value_123",
+          "Secret": "password",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 2.75,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "env",
+            "secret"
+          ],
+          "RuleID": "environment-variable-secrets",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:environment-variable-secrets:783"
+        },
+        {
+          "Description": "Environment variable with secrets",
+          "StartLine": 803,
+          "EndLine": 803,
+          "StartColumn": 7,
+          "EndColumn": 35,
+          "Match": "PASSWORD={generated_var_name}",
+          "Secret": "PASSWORD",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 2.75,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "env",
+            "secret"
+          ],
+          "RuleID": "environment-variable-secrets",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:environment-variable-secrets:803"
+        },
+        {
+          "Description": "Environment variable with secrets",
+          "StartLine": 807,
+          "EndLine": 807,
+          "StartColumn": 8,
+          "EndColumn": 31,
+          "Match": "KEY={generated_var_name}",
+          "Secret": "KEY",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 1.5849625,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "env",
+            "secret"
+          ],
+          "RuleID": "environment-variable-secrets",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:environment-variable-secrets:807"
+        },
+        {
+          "Description": "Environment variable with secrets",
+          "StartLine": 808,
+          "EndLine": 808,
+          "StartColumn": 11,
+          "EndColumn": 34,
+          "Match": "KEY={generated_var_name}",
+          "Secret": "KEY",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 1.5849625,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "env",
+            "secret"
+          ],
+          "RuleID": "environment-variable-secrets",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:environment-variable-secrets:808"
+        },
+        {
+          "Description": "Environment variable with secrets",
+          "StartLine": 811,
+          "EndLine": 811,
+          "StartColumn": 8,
+          "EndColumn": 34,
+          "Match": "SECRET={generated_var_name}",
+          "Secret": "SECRET",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 2.251629,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "env",
+            "secret"
+          ],
+          "RuleID": "environment-variable-secrets",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:environment-variable-secrets:811"
+        },
+        {
+          "Description": "Environment variable with secrets",
+          "StartLine": 812,
+          "EndLine": 812,
+          "StartColumn": 9,
+          "EndColumn": 34,
+          "Match": "TOKEN={generated_var_name}",
+          "Secret": "TOKEN",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 2.321928,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "env",
+            "secret"
+          ],
+          "RuleID": "environment-variable-secrets",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:environment-variable-secrets:812"
+        },
+        {
+          "Description": "Environment variable with secrets",
+          "StartLine": 816,
+          "EndLine": 816,
+          "StartColumn": 22,
+          "EndColumn": 45,
+          "Match": "KEY={generated_var_name}",
+          "Secret": "KEY",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 1.5849625,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "env",
+            "secret"
+          ],
+          "RuleID": "environment-variable-secrets",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:environment-variable-secrets:816"
+        },
+        {
+          "Description": "Environment variable with secrets",
+          "StartLine": 850,
+          "EndLine": 850,
+          "StartColumn": 19,
+          "EndColumn": 52,
+          "Match": "key\": self._generate_api_rotation,",
+          "Secret": "key",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 1.5849625,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "env",
+            "secret"
+          ],
+          "RuleID": "environment-variable-secrets",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:environment-variable-secrets:850"
+        },
+        {
+          "Description": "Environment variable with secrets",
+          "StartLine": 852,
+          "EndLine": 852,
+          "StartColumn": 19,
+          "EndColumn": 52,
+          "Match": "key\": self._generate_ssh_rotation,",
+          "Secret": "key",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 1.5849625,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "env",
+            "secret"
+          ],
+          "RuleID": "environment-variable-secrets",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:environment-variable-secrets:852"
+        },
+        {
+          "Description": "PostgreSQL Connection String",
+          "StartLine": 804,
+          "EndLine": 804,
+          "StartColumn": 11,
+          "EndColumn": 70,
+          "Match": "postgresql://user:{generated_var_name}@localhost:5432/dbname",
+          "Secret": "ql",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 1,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "database",
+            "postgresql",
+            "connection-string"
+          ],
+          "RuleID": "postgresql-connection-string",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:postgresql-connection-string:804"
+        },
+        {
+          "Description": "Environment variable with secrets",
+          "StartLine": 1048,
+          "EndLine": 1048,
+          "StartColumn": 10,
+          "EndColumn": 34,
+          "Match": "secret = str(finding.get(",
+          "Secret": "secret",
+          "File": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md",
+          "SymlinkFile": "",
+          "Commit": "",
+          "Entropy": 2.251629,
+          "Author": "",
+          "Email": "",
+          "Date": "",
+          "Message": "",
+          "Tags": [
+            "env",
+            "secret"
+          ],
+          "RuleID": "environment-variable-secrets",
+          "Fingerprint": "/home/mmattei/Projects/.worktrees/feature/gitlab-security-audit-system/docs/plans/2026-03-04-gitlab-security-audit-implementation.md:environment-variable-secrets:1048"
+        }
+      ],
+      "findings_count": 13
+    },
+    "semgrep": {
+      "status": "success",
+      "tool_version": "1.146.0",
+      "scan_time": "2026-03-04T07:57:52.184661",
+      "findings": [],
+      "findings_count": 0
+    }
+  }
+}
